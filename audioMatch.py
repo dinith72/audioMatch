@@ -11,11 +11,13 @@ matchPath = 'D:\\din songs'
 destinationPathSp = 'D:\\new songs' # spcial path for getting only the new files added
 destinationPath = 'D:\\din songs'
 songs = []
+totalFiles = 0
+filesCopied = 0
 for file in listdir(sourcePath): # getting the target sources directory
     songs.append(join(sourcePath , file)) # adding all the target songs into the songs array
-
+    totalFiles += 1
 for targetSong in songs: # getting each song from the target songs array
-    print(targetSong)
+    # print(targetSong)
     doesNotExist = True
     for matchfile in listdir(matchPath) : # comparing it with all the songs to be matched
         if doesNotExist == True:
@@ -26,10 +28,12 @@ for targetSong in songs: # getting each song from the target songs array
 
     if doesNotExist == True: # if the file is not in the main folder it is copied
         destinationFile = join(destinationPath, os.path.basename(targetSong)) # createting the new destination file
-        print(destinationFile)
+        # print(destinationFile)
         shutil.copy(targetSong,destinationPath)
         shutil.copy(targetSong,destinationPathSp)
-
+        filesCopied += 1
+print('total files processed :' + str(totalFiles))
+print('total files copied :' + str(filesCopied))
 # if status == False:
 #     shutil.copyfile(songs[0],destinationPath)
 # print(os.path.basename(songs[0]))
